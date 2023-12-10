@@ -1,0 +1,10 @@
+{
+	"manifest_version": 3,
+	"name": "What did i search for?",
+	"version": "0.0.1",
+	"description": "A service that records and determines what users have searched for",
+	"action": {
+		"default_title": "what did i search for?",
+		"default_popup": "./popup.html"
+	}
+}
