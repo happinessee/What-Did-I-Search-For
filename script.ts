@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   mockdata.forEach((val, i, arr) => {
     const container = document.getElementById("card-container")!;
     container.innerHTML = "";
+    container.className = "main-card";
 
     const indexElement = makeCardIndex(i);
     container.appendChild(indexElement);
@@ -49,7 +50,7 @@ const makeCardIndex = (i: number) => {
 
 const makeCardContent = (mainWord: string, subWords: string[]) => {
   const contentElement = document.createElement("div");
-  contentElement.className = "card-conntent";
+  contentElement.className = "card-content";
 
   const mainWordElement = document.createElement("div");
   mainWordElement.textContent = mainWord;
