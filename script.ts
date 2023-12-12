@@ -1,20 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
   const mockdata = fetchMockData();
+  const container = document.getElementById("card-container")!;
+  container.innerHTML = "";
   mockdata.forEach((val, i, arr) => {
-    const container = document.getElementById("card-container")!;
-    container.innerHTML = "";
-    container.className = "main-card";
+    const innerContainer = document.createElement("div");
+    innerContainer.className = "main-card";
 
     const indexElement = makeCardIndex(i);
-    container.appendChild(indexElement);
+    innerContainer.appendChild(indexElement);
 
     const cardContent = makeCardContent(val.mainWord, val.subWords);
-    container.appendChild(cardContent);
+    innerContainer.appendChild(cardContent);
 
     const countsElement = makeCountElement(val.counts);
-    container.appendChild(countsElement);
+    innerContainer.appendChild(countsElement);
 
-    container.appendChild(makeIcon());
+    innerContainer.appendChild(makeIcon());
+    container.appendChild(innerContainer);
   });
 });
 
@@ -25,6 +27,8 @@ type CardData = {
 };
 
 const makeIcon = () => {
+  const wrapper = document.createElement("div");
+  wrapper.className = "card-index";
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("height", "24");
   svg.setAttribute("viewBox", "0 -960 960 960");
@@ -38,7 +42,8 @@ const makeIcon = () => {
 
   // Append the path to the SVG
   svg.appendChild(path);
-  return svg;
+  wrapper.appendChild(svg);
+  return wrapper;
 };
 
 const makeCardIndex = (i: number) => {
@@ -54,15 +59,20 @@ const makeCardContent = (mainWord: string, subWords: string[]) => {
 
   const mainWordElement = document.createElement("div");
   mainWordElement.textContent = mainWord;
+  mainWordElement.style.fontSize = "20px";
   contentElement.appendChild(mainWordElement);
 
   const subWordsElement = makeSubWords(subWords);
+  subWordsElement.style.fontSize = "14px";
   contentElement.appendChild(subWordsElement);
   return contentElement;
 };
 
 const makeSubWords = (subWords: string[]) => {
   const subWordsElement = document.createElement("div");
+  subWordsElement.style.display = "flex";
+  subWordsElement.style.flexDirection = "row";
+  subWordsElement.style.gap = "4px";
   subWords.forEach((val) => {
     const subWord = document.createElement("div");
     subWord.textContent = val;
