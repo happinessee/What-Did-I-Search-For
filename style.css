@@ -1,11 +1,53 @@
-div {
-	font-size: 16px;
-	padding: 2px;
+h1 {
+  font-size: 32px;
+  line-height: normal;
 }
 
 body {
-	width: 600px;
-	background-color: #ff9500;
+  width: 500px;
+  height: 500px;
+  background-color: #fefefe;
   padding: 0 20px 20px 20px;
   border: 5px solid black;
+}
+
+.main-card {
+  display: flex;
+  flex-direction: row;
+  background-color: #fefefe;
+  height: 64px;
+  width: 460px;
+	border: solid;
+	border-radius: 8px;
+	border-color: #4f4f4f;
+	border-width: 1px;
+}
+
+.card-index {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: max-content;
+  width: 50px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  width: 300px;
+  min-height: max-content;
+  gap: 5px;
+}
+
+.card-searchCount {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  min-height: max-content;
+	padding: 0 10px 0 10px;
 }
