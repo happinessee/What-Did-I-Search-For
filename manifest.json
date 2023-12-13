@@ -6,5 +6,19 @@
 	"action": {
 		"default_title": "what did i search for?",
 		"default_popup": "./popup.html"
-	}
+	},
+	"permissions": [
+		"activeTab",
+		"<all_urls>"
+	],
+	"content_scripts": [
+		{
+			"matches": [
+				"<all_urls>"
+			],
+			"js": [
+				"find.js"
+			]
+		}
+	]
 }
