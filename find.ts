@@ -26,21 +26,28 @@ const nameProperty = [
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
-  const checkProperty = nameProperty.find(
-    (val) => document.getElementsByName("input[name='${val}']") !== null
-  );
-  console.log(checkProperty);
-  if (checkProperty) {
-    const searchBox = document.querySelector(
-      "input[name='${checkProperty}']"
-    ) as HTMLInputElement;
-    console.log(searchBox);
+  let mutationObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.addedNodes.length > 0) {
+        const checkProperty = nameProperty.find(
+          (val) => document.querySelector(`input[name="${val}"]`) !== null
+        );
 
-    if (searchBox) {
-      searchBox.addEventListener("change", () => {
-        const searchValue = searchBox.value;
-        console.log("SEARCH_VALUE_TEST: ", searchValue);
-      });
-    }
-  }
+        if (checkProperty) {
+          const searchBox = document.querySelector(
+            `input[name="${checkProperty}"]`
+          ) as HTMLInputElement;
+          if (searchBox) {
+            // 여기에서 검색창에 대한 추가 작업을 수행합니다.
+            console.log("검색창이 발견되었습니다: ", searchBox);
+          }
+        }
+      }
+    });
+  });
+
+  mutationObserver.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
 });
