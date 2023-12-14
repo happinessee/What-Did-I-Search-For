@@ -11,9 +11,36 @@
  *  "ss": Booking.com
  *  "k": Adobe Stock
  */
-const inputQuery = ["q", "p", "wd", "query", "text"];
+const nameProperty = [
+  "q",
+  "p",
+  "wd",
+  "query",
+  "text",
+  "search",
+  "field-keywords",
+  "_nkw",
+  "search-query",
+  "ss",
+  "k",
+];
 
-const searchBox = document.querySelector(`input[name="q"]`);
-// Yahoo
-const searchBox2 = document.querySelector(`input[name="p"]`);
-// Baidu
+document.addEventListener("DOMContentLoaded", () => {
+  const checkProperty = nameProperty.find(
+    (val) => document.getElementsByName("input[name='${val}']") !== null
+  );
+  console.log(checkProperty);
+  if (checkProperty) {
+    const searchBox = document.querySelector(
+      "input[name='${checkProperty}']"
+    ) as HTMLInputElement;
+    console.log(searchBox);
+
+    if (searchBox) {
+      searchBox.addEventListener("change", () => {
+        const searchValue = searchBox.value;
+        console.log("SEARCH_VALUE_TEST: ", searchValue);
+      });
+    }
+  }
+});
