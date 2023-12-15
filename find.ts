@@ -25,29 +25,30 @@ const nameProperty = [
   "k",
 ];
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  const checkProperty = nameProperty.find(
+    (val) => document.querySelector(`input[name="${val}"]`) !== null
+  );
+  console.log(checkProperty);
   let mutationObserver = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
-      if (mutation.addedNodes.length > 0) {
-        const checkProperty = nameProperty.find(
-          (val) => document.querySelector(`input[name="${val}"]`) !== null
-        );
-
-        if (checkProperty) {
-          const searchBox = document.querySelector(
-            `input[name="${checkProperty}"]`
-          ) as HTMLInputElement;
-          if (searchBox) {
-            // 여기에서 검색창에 대한 추가 작업을 수행합니다.
-            console.log("검색창이 발견되었습니다: ", searchBox);
-          }
+      if (checkProperty) {
+        const searchBox = document.querySelector(
+          `input[name="${checkProperty}"]`
+        ) as HTMLInputElement;
+        console.log(searchBox);
+        if (searchBox) {
+          // 여기에서 검색창에 대한 추가 작업을 수행합니다.
+          console.log("검색창이 발견되었습니다: ", searchBox);
         }
       }
     });
   });
 
   mutationObserver.observe(document.body, {
+    attributes: true,
     childList: true,
     subtree: true,
+    characterData: true,
   });
 });
