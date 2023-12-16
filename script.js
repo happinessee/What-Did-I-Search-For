@@ -16,6 +16,15 @@ document.addEventListener("DOMContentLoaded", () => {
         container.appendChild(innerContainer);
     });
 });
+window.addEventListener("message", (event) => {
+    // We only accept messages from ourselves
+    if (event.source !== window) {
+        return;
+    }
+    if (event.data.type && event.data.type === "test") {
+        console.log("Content script received: " + event.data.text);
+    }
+});
 const makeIcon = () => {
     const wrapper = document.createElement("div");
     wrapper.className = "card-index";

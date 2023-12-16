@@ -11,6 +11,7 @@
  *  "ss": Booking.com
  *  "k": Adobe Stock
  */
+
 const nameProperty = [
   "q",
   "p",
@@ -26,29 +27,30 @@ const nameProperty = [
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
+  window.postMessage({ type: "test", text: "minho-jjang" }, "*");
+
   const checkProperty = nameProperty.find(
     (val) => document.querySelector(`input[name="${val}"]`) !== null
   );
-  console.log(checkProperty);
-  let mutationObserver = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (checkProperty) {
-        const searchBox = document.querySelector(
-          `input[name="${checkProperty}"]`
-        ) as HTMLInputElement;
-        console.log(searchBox);
-        if (searchBox) {
-          // 여기에서 검색창에 대한 추가 작업을 수행합니다.
-          console.log("검색창이 발견되었습니다: ", searchBox);
-        }
-      }
-    });
-  });
+  window.postMessage(
+    { type: "test", text: `checkProperty: ${checkProperty}` },
+    "*"
+  );
+  if (checkProperty) {
+    const searchBox = document.querySelector(
+      `input[name="${checkProperty}"]`
+    ) as HTMLInputElement;
 
-  mutationObserver.observe(document.body, {
-    attributes: true,
-    childList: true,
-    subtree: true,
-    characterData: true,
-  });
+    window.postMessage({ type: "test", text: `searchBox${searchBox}` }, "*");
+    if (searchBox) {
+      // 여기에서 검색창에 대한 추가 작업을 수행합니다.
+      window.postMessage(
+        {
+          type: "test",
+          text: `검색창이 발견되었습니다. 불꽃-카리스마 민호.`,
+        },
+        "*"
+      );
+    }
+  }
 });
