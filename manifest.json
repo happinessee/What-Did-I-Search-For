@@ -8,7 +8,8 @@
 		"default_popup": "./popup.html"
 	},
 	"permissions": [
-		"activeTab"
+		"activeTab",
+		"scripting"
 	],
 	"content_scripts": [
 		{
@@ -16,7 +17,7 @@
 				"<all_urls>"
 			],
 			"js": [
-				"find.js"
+				"./find.js"
 			],
 			"run_at": "document_idle",
 			"all_frames": true
