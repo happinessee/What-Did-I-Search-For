@@ -6,6 +6,7 @@
 	},
 	"packageManager": "yarn@4.1.0",
 	"devDependencies": {
+		"@types/chrome": "^0.0.260",
 		"typescript": "^5.3.3"
 	}
 }
