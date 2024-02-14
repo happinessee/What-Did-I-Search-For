@@ -1,4 +1,9 @@
-.pnp.*
+*.js
+**/*.js
+
+.DS_Store
+
+# yarn berry
 .yarn/*
 !.yarn/cache
 !.yarn/patches

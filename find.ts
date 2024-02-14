@@ -31,28 +31,22 @@ function checkDocumentReady() {
   if (document.readyState === "complete") {
     setupInputListener();
   } else {
-    // 상태가 'complete'가 아니면, 이 함수를 다시 호출
-    console.log("wait...");
     setTimeout(checkDocumentReady, 50);
   }
 }
 
 // 'myInput' input 요소에 이벤트 리스너를 설정하는 함수
 function setupInputListener() {
-  const nameAttirbutes = nameTag.find(
+  const nameAttributes = nameTag.find(
     (val) => document.querySelector(`input[name="${val}"]`) !== null
   );
-  console.log("nameAttributes: ", nameAttirbutes);
-  var input = document.querySelector(`input[name='${nameAttirbutes}']`);
-  console.log((input as HTMLInputElement).value);
+  if (nameAttributes === undefined) return;
 
+  const input = document.querySelector(`input[name='${nameAttributes}']`);
   if (input) {
-    console.log("input value: true");
     input.addEventListener("input", (e) => {
       console.log((e.target as HTMLInputElement).value);
     });
-  } else {
-    console.log("input value: false");
   }
 }
 
