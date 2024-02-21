@@ -44,7 +44,12 @@ function setupInputListener() {
 
   const input = document.querySelector(`input[name='${nameAttributes}']`);
   if (input) {
-    input.addEventListener("input", (e) => {
+    input.addEventListener("input", async (e) => {
+      const searchValue = (e.target as HTMLInputElement).value;
+      const dateKey = new Date().toISOString().slice(0, 10);
+      const existingData = await chrome.storage.local.get(dateKey);
+      existingData;
+      chrome.storage.local.set({});
       console.log((e.target as HTMLInputElement).value);
     });
   }
