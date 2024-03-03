@@ -26,6 +26,8 @@ const nameTag = [
   "k",
 ];
 
+const storageKey = "whatDidISearchFor?";
+
 // 페이지 로드 상태를 확인하고, 완료되었을 때 함수 실행
 function checkDocumentReady() {
   if (document.readyState === "complete") {
@@ -36,22 +38,25 @@ function checkDocumentReady() {
 }
 
 // 'myInput' input 요소에 이벤트 리스너를 설정하는 함수
-function setupInputListener() {
+async function setupInputListener() {
   const nameAttributes = nameTag.find(
     (val) => document.querySelector(`input[name="${val}"]`) !== null
   );
   if (nameAttributes === undefined) return;
 
   const input = document.querySelector(`input[name='${nameAttributes}']`);
-  if (input) {
-    input.addEventListener("input", async (e) => {
-      const searchValue = (e.target as HTMLInputElement).value;
-      const dateKey = new Date().toISOString().slice(0, 10);
-      const existingData = await chrome.storage.local.get(dateKey);
-      existingData;
-      chrome.storage.local.set({});
-      console.log((e.target as HTMLInputElement).value);
-    });
+
+  if (!!input) {
+    const searchValue = input.getAttribute("value");
+    const dateKey = new Date().toISOString().slice(0, 10);
+    const localStorageData = await chrome.storage.local.get(dateKey);
+    if (Object.keys(localStorageData).length === 0) {
+      await chrome.storage.local.set({ [dateKey]: [searchValue] });
+    } else {
+      const addedValue = localStorageData[dateKey].concat(searchValue);
+      await chrome.storage.local.set({ [dateKey]: addedValue });
+    }
+    console.log("chrome storage: ", await chrome.storage.local.get(dateKey));
   }
 }
 
