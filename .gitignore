@@ -2,6 +2,7 @@
 **/*.js
 
 .DS_Store
+*.js
 
 # yarn berry
 .yarn/*
